@@ -9,13 +9,21 @@ import Work from "./components/Work"
 function App() {
 
   return (
-    <>
-<Hero/>
-<AboutSection/>
-<Work/>
-<HorizontalScroll/>
-<ContactSection/>
-<Footer/>
+      <>
+      <Hero />
+      <div id="about">
+        <AboutSection />
+      </div>
+      <div id="work">
+        <Work />
+      </div>
+      <div id="projects">
+        <HorizontalScroll />
+      </div>
+      <div id="contact">
+        <ContactSection />
+      </div>
+      <Footer />
     </>
   )
 }

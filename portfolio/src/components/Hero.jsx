@@ -68,14 +68,14 @@ return (
           
           {/* CTA Buttons - improved with multiple options */}
           <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-3 sm:space-y-0 sm:space-x-4 mb-8 sm:mb-12">
-            <button className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
+            <a  href="#work" className="px-6 sm:px-8 py-3 sm:py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-medium rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
               View My Work
               <FaArrowRight className="ml-2 w-4 h-4" />
-            </button>
-            <button className="px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
+            </a>
+            <a  href="#contact" className="px-6 sm:px-8 py-3 sm:py-4 bg-transparent border-2 border-blue-600 dark:border-blue-400 text-blue-600 dark:text-blue-400 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
               Contact Me
               <FaEnvelope className="ml-2 w-4 h-4" />
-            </button>
+            </a>
           </div>
           
           {/* Social icons with improved hover effects */}
