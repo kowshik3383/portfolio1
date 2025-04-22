@@ -105,13 +105,13 @@ export default function AboutSection() {
         </div>
 
         {/* CTA Section */}
-        <div className="text-center">
+        <div className="text-center ">
           <h2 className="text-3xl font-bold text-gray-900 mb-6">Let's Work Together</h2>
           <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
             Ready to create something amazing? Get in touch with me to discuss your next web development project.
           </p>
           <div>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-8 rounded-lg mr-4">
+            <button className="bg-blue-600 hover:bg-blue-700 mb-4 text-white font-medium py-3 px-8 rounded-lg mr-4">
               Contact Me
             </button>
             <button className="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-3 px-8 rounded-lg">

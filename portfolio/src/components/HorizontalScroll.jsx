@@ -143,173 +143,173 @@ const portfolioItems = [
   // Toggle auto scroll manually
 
 
-  return (
-    <div 
-      ref={sectionRef}
-      className="relative w-full max-w-6xl mx-auto  py-12  "
-    >
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-3xl font-bold text-gray-800">My Achievements</h2>
-        
-        {/* Status indicator showing if auto-scroll is active */}
-        <div className="flex items-center gap-2 text-sm">
-          <span className={`w-2 h-2 rounded-full ${isInView && isAutoScrolling && !isPaused ? 'bg-green-500' : 'bg-gray-300'}`}></span>
-          <span className="text-gray-600">
-            {isInView ? (isPaused ? 'Scroll paused' : (isAutoScrolling ? 'Auto-scrolling' : 'Manual mode')) : 'Scroll inactive'}
-          </span>
-        </div>
+return (
+  <div 
+    ref={sectionRef}
+    className="relative w-full max-w-6xl mx-auto py-8 md:py-12 px-4 sm:px-6"
+  >
+    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-3">
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-800">My Achievements</h2>
+      
+      {/* Status indicator showing if auto-scroll is active */}
+      <div className="flex items-center gap-2 text-sm">
+        <span className={`w-2 h-2 rounded-full ${isInView && isAutoScrolling && !isPaused ? 'bg-green-500' : 'bg-gray-300'}`}></span>
+        <span className="text-gray-600">
+          {isInView ? (isPaused ? 'Scroll paused' : (isAutoScrolling ? 'Auto-scrolling' : 'Manual mode')) : 'Scroll inactive'}
+        </span>
       </div>
-      
-      {/* Left scroll button */}
-      {showLeftArrow && (
-        <button 
-          onClick={() => scroll('left')}
-          className="absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
-          aria-label="Scroll left"
-        >
-          <ChevronLeft size={24} className="text-gray-700" />
-        </button>
-      )}
-      
-      {/* Scroll container */}
-      <div 
-        ref={scrollContainerRef}
-        className="flex overflow-x-auto gap-6 pb-6 scrollbar-hide snap-x snap-mandatory"
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        onScroll={handleScroll}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+    </div>
+    
+    {/* Left scroll button - hidden on mobile */}
+    {showLeftArrow && (
+      <button 
+        onClick={() => scroll('left')}
+        className="hidden md:block absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
+        aria-label="Scroll left"
       >
-        {portfolioItems.map((item) => (
-          <div 
-            key={item.id} 
-            className={`flex-none w-72 snap-center rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 ${item.type === 'certificate' ? 'cursor-pointer' : ''}`}
-            onClick={() => handleCardClick(item)}
-          >
-            <div className="relative h-44 bg-gray-100 overflow-hidden">
-              <img 
-                src={item.image} 
-                alt={item.title} 
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-              />
-              <div className={`absolute top-3 right-3 ${item.type === 'certificate' ? 'bg-blue-500' : 'bg-emerald-500'} text-white text-xs px-3 py-1 rounded-full font-medium shadow-md`}>
-                {item.type === 'certificate' ? 'Certificate' : 'Project'}
+        <ChevronLeft size={24} className="text-gray-700" />
+      </button>
+    )}
+    
+    {/* Scroll container */}
+    <div 
+      ref={scrollContainerRef}
+      className="flex overflow-x-auto gap-4 md:gap-6 pb-6 scrollbar-hide snap-x snap-mandatory"
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      onScroll={handleScroll}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {portfolioItems.map((item) => (
+        <div 
+          key={item.id} 
+          className={`flex-none w-[85%] sm:w-[45%] md:w-72 snap-center rounded-xl overflow-hidden shadow-lg bg-white hover:shadow-xl transition-all duration-300 hover:scale-105 ${item.type === 'certificate' ? 'cursor-pointer' : ''}`}
+          onClick={() => handleCardClick(item)}
+        >
+          <div className="relative h-36 sm:h-44 bg-gray-100 overflow-hidden">
+            <img 
+              src={item.image} 
+              alt={item.title} 
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+            />
+            <div className={`absolute top-2 right-2 sm:top-3 sm:right-3 ${item.type === 'certificate' ? 'bg-blue-500' : 'bg-emerald-500'} text-white text-xs px-2 py-1 sm:px-3 rounded-full font-medium shadow-md`}>
+              {item.type === 'certificate' ? 'Certificate' : 'Project'}
+            </div>
+            {item.type === 'certificate' && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2 sm:p-3">
+                <p className="text-white text-xs">Click to view details</p>
               </div>
-              {item.type === 'certificate' && (
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                  <p className="text-white text-xs">Click to view details</p>
-                </div>
+            )}
+          </div>
+          <div className="p-4 sm:p-5">
+            <div className="flex items-start justify-between">
+              <h3 className="font-bold text-base sm:text-lg text-gray-800">{item.title}</h3>
+              {item.type === 'certificate' ? (
+                <Award size={18} className="text-blue-500" />
+              ) : (
+                <ExternalLink size={18} className="text-emerald-500" />
               )}
             </div>
-            <div className="p-5">
-              <div className="flex items-start justify-between">
-                <h3 className="font-bold text-lg text-gray-800">{item.title}</h3>
-                {item.type === 'certificate' ? (
-                  <Award size={20} className="text-blue-500" />
-                ) : (
-                  <ExternalLink size={20} className="text-emerald-500" />
-                )}
-              </div>
-              <p className="mt-2 text-gray-600 text-sm">{item.description}</p>
-              <div className="mt-3 pt-3 border-t border-gray-100">
-                {item.type === 'certificate' ? (
-                  <p className="text-xs text-gray-500">Issued by {item.issuer} • {item.date}</p>
-                ) : (
-                  <p className="text-xs text-gray-500">Tech: {item.technologies}</p>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      {/* Right scroll button */}
-      {showRightArrow && (
-        <button 
-          onClick={() => scroll('right')}
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
-          aria-label="Scroll right"
-        >
-          <ChevronRight size={24} className="text-gray-700" />
-        </button>
-      )}
-      
-      {/* Indicator dots */}
-      <div className="flex justify-center mt-6 gap-2">
-        {Array.from({ length: Math.ceil(portfolioItems.length / 3) }).map((_, index) => {
-          // Calculate which dot should be active based on scroll position
-          const isActive = index === 0; // Default to first dot
-          return (
-            <div 
-              key={index} 
-              className={`h-2 w-2 rounded-full transition-all duration-300 ${isActive ? 'bg-blue-500 w-6' : 'bg-gray-300 hover:bg-gray-400'}`}
-            ></div>
-          );
-        })}
-      </div>
-      
-      {/* Certificate Modal */}
-      {modalOpen && selectedItem && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto animate-fadeIn">
-            <div className="relative">
-              <img 
-                src={selectedItem.image} 
-                alt={selectedItem.title} 
-                className="w-full h-52 object-cover"
-              />
-              <button 
-                onClick={closeModal}
-                className="absolute top-4 right-4 bg-black/50 hover:bg-black text-white rounded-full p-2 transition-colors"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            
-            <div className="p-6">
-              <div className="flex items-center gap-3 mb-4">
-                <Award size={28} className="text-blue-500" />
-                <h3 className="text-2xl font-bold text-gray-800">{selectedItem.title}</h3>
-              </div>
-              
-              <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-6">
-                <p className="text-gray-700">{selectedItem.description}</p>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-6 mb-6">
-                <div>
-                  <h4 className="text-sm font-medium text-gray-500 mb-1">ISSUED BY</h4>
-                  <p className="text-gray-800 font-medium">{selectedItem.issuer}</p>
-                </div>
-                <div>
-                  <h4 className="text-sm font-medium text-gray-500 mb-1">DATE</h4>
-                  <p className="text-gray-800 font-medium">{selectedItem.date}</p>
-                </div>
-              </div>
-              
-              <div className="border-t border-gray-100 pt-6 mt-6">
-                <h4 className="text-sm font-medium text-gray-500 mb-3">CERTIFICATE PREVIEW</h4>
-                <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                  <img 
-                    src={selectedItem.image}
-                    alt={`${selectedItem.title} certificate`}
-                    className="max-h-full rounded shadow"
-                  />
-                </div>
-              </div>
-              
-              <div className="mt-6 flex justify-end">
-                <button 
-                  onClick={closeModal}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors"
-                >
-                  Close
-                </button>
-              </div>
+            <p className="mt-2 text-gray-600 text-xs sm:text-sm">{item.description}</p>
+            <div className="mt-3 pt-3 border-t border-gray-100">
+              {item.type === 'certificate' ? (
+                <p className="text-xs text-gray-500">Issued by {item.issuer} • {item.date}</p>
+              ) : (
+                <p className="text-xs text-gray-500">Tech: {item.technologies}</p>
+              )}
             </div>
           </div>
         </div>
-      )}
+      ))}
     </div>
-  );
+    
+    {/* Right scroll button - hidden on mobile */}
+    {showRightArrow && (
+      <button 
+        onClick={() => scroll('right')}
+        className="hidden md:block absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white hover:bg-gray-50 rounded-full p-2 shadow-lg transition-all duration-300 hover:scale-110"
+        aria-label="Scroll right"
+      >
+        <ChevronRight size={24} className="text-gray-700" />
+      </button>
+    )}
+    
+    {/* Indicator dots */}
+    <div className="flex justify-center mt-4 md:mt-6 gap-2">
+      {Array.from({ length: Math.ceil(portfolioItems.length / (window.innerWidth >= 768 ? 3 : window.innerWidth >= 640 ? 2 : 1)) }).map((_, index) => {
+        // Calculate which dot should be active based on scroll position
+        const isActive = index === 0; // Default to first dot
+        return (
+          <div 
+            key={index} 
+            className={`h-2 w-2 rounded-full transition-all duration-300 ${isActive ? 'bg-blue-500 w-4 md:w-6' : 'bg-gray-300 hover:bg-gray-400'}`}
+          ></div>
+        );
+      })}
+    </div>
+    
+    {/* Certificate Modal */}
+    {modalOpen && selectedItem && (
+      <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-2 sm:p-4">
+        <div className="bg-white rounded-xl w-full max-w-md sm:max-w-2xl max-h-[90vh] overflow-y-auto animate-fadeIn">
+          <div className="relative">
+            <img 
+              src={selectedItem.image} 
+              alt={selectedItem.title} 
+              className="w-full h-40 sm:h-52 object-cover"
+            />
+            <button 
+              onClick={closeModal}
+              className="absolute top-2 right-2 sm:top-4 sm:right-4 bg-black/50 hover:bg-black text-white rounded-full p-1 sm:p-2 transition-colors"
+            >
+              <X size={18} />
+            </button>
+          </div>
+          
+          <div className="p-4 sm:p-6">
+            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+              <Award size={24} className="text-blue-500" />
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-800">{selectedItem.title}</h3>
+            </div>
+            
+            <div className="bg-blue-50 border-l-4 border-blue-500 p-3 sm:p-4 rounded mb-4 sm:mb-6">
+              <p className="text-gray-700 text-sm sm:text-base">{selectedItem.description}</p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
+              <div>
+                <h4 className="text-xs sm:text-sm font-medium text-gray-500 mb-1">ISSUED BY</h4>
+                <p className="text-gray-800 font-medium text-sm sm:text-base">{selectedItem.issuer}</p>
+              </div>
+              <div>
+                <h4 className="text-xs sm:text-sm font-medium text-gray-500 mb-1">DATE</h4>
+                <p className="text-gray-800 font-medium text-sm sm:text-base">{selectedItem.date}</p>
+              </div>
+            </div>
+            
+            <div className="border-t border-gray-100 pt-4 sm:pt-6 mt-4 sm:mt-6">
+              <h4 className="text-xs sm:text-sm font-medium text-gray-500 mb-2 sm:mb-3">CERTIFICATE PREVIEW</h4>
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                <img 
+                  src={selectedItem.image}
+                  alt={`${selectedItem.title} certificate`}
+                  className="max-h-full rounded shadow"
+                />
+              </div>
+            </div>
+            
+            <div className="mt-4 sm:mt-6 flex justify-end">
+              <button 
+                onClick={closeModal}
+                className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 rounded-lg transition-colors text-sm sm:text-base"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+);
 }
